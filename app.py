@@ -20,23 +20,23 @@ from langchain.agents.agent_toolkits import (
 
 # Set APIkey for OpenAI Service
 # Can sub this out for other LLM providers
-os.environ['OPENAI_API_KEY'] = 'youropenaiapikeyhere'
+os.environ['OPENAI_API_KEY'] = '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'
 
 # Create instance of OpenAI LLM
 llm = OpenAI(temperature=0.1, verbose=True)
 embeddings = OpenAIEmbeddings()
 
 # Create and load PDF Loader
-loader = PyPDFLoader('annualreport.pdf')
+loader = PyPDFLoader('Employee-Handbook.pdf')
 # Split pages from pdf 
 pages = loader.load_and_split()
 # Load documents into vector database aka ChromaDB
-store = Chroma.from_documents(pages, embeddings, collection_name='annualreport')
+store = Chroma.from_documents(pages, embeddings, collection_name='handbook')
 
 # Create vectorstore info object - metadata repo?
 vectorstore_info = VectorStoreInfo(
-    name="annual_report",
-    description="a banking annual report as a pdf",
+    name="employee handbook",
+    description="employee handbook as a pdf",
     vectorstore=store
 )
 # Convert the document store into a langchain toolkit
